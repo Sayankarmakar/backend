@@ -1,0 +1,14 @@
+FROM python:3.9
+
+WORKDIR /backend_flask
+
+COPY requirements.txt requirements.txt
+RUN pip install --upgrade pip
+RUN pip install -r requirements.txt
+
+# Ensure NLTK stopwords are downloaded
+RUN python -m nltk.downloader stopwords
+
+COPY . .
+
+CMD ["python", "app.py"]
